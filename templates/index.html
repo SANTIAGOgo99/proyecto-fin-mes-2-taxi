@@ -10,7 +10,7 @@
     <main class="container">
         <section class="card">
             <h1>Predicción de precio de viaje en taxi</h1>
-            <p>Este formulario estima el precio total de un viaje usando el modelo seleccionado en el proyecto. Ingresa valores reales del viaje; el sistema aplicará internamente la imputación, codificación y escalado del pipeline.</p>
+            <p> Ingresa los datos principales del viaje, como la distancia, duración, tarifa base, tarifa por kilómetro y condiciones del tráfico. Con esta información, el sistema calculará un precio estimado del viaje en taxi.</p>
             <form method="POST">
                 <label>Tarifa base (USD)
                     <input type="number" name="Base_Fare" step="0.01" min="0" required value="{{ values.get('Base_Fare', 3.50) }}">
