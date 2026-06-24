@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predicción de precio de taxi</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="container">
+        <section class="card">
+            <h1>Predicción de precio de viaje en taxi</h1>
+            <p>Este formulario estima el precio total de un viaje usando el modelo seleccionado en el proyecto. Ingresa valores reales del viaje; el sistema aplicará internamente la imputación, codificación y escalado del pipeline.</p>
+            <form method="POST">
+                <label>Tarifa base (USD)
+                    <input type="number" name="Base_Fare" step="0.01" min="0" required value="{{ values.get('Base_Fare', 3.50) }}">
+                </label>
+                <label>Distancia del viaje (km)
+                    <input type="number" name="Trip_Distance_km" step="0.01" min="0" required value="{{ values.get('Trip_Distance_km', 12.5) }}">
+                </label>
+                <label>Tarifa por kilómetro (USD/km)
+                    <input type="number" name="Per_Km_Rate" step="0.01" min="0" required value="{{ values.get('Per_Km_Rate', 1.20) }}">
+                </label>
+                <label>Duración del viaje (minutos)
+                    <input type="number" name="Trip_Duration_Minutes" step="0.01" min="0" required value="{{ values.get('Trip_Duration_Minutes', 35) }}">
+                </label>
+                <label>Tarifa por minuto (USD/min)
+                    <input type="number" name="Per_Minute_Rate" step="0.01" min="0" required value="{{ values.get('Per_Minute_Rate', 0.30) }}">
+                </label>
+                <label>Condiciones del tráfico
+                    <select name="Traffic_Conditions">
+                        {% for option in traffic_options %}
+                        <option value="{{ option }}" {% if values.get('Traffic_Conditions') == option %}selected{% endif %}>{{ option }}</option>
+                        {% endfor %}
+                    </select>
+                </label>
+                <button type="submit">Predecir precio</button>
+            </form>
+            {% if prediction is not none %}
+            <div class="result">Precio estimado del viaje: <strong>${{ '%.2f'|format(prediction) }} USD</strong></div>
+            {% endif %}
+            {% if error %}
+            <div class="error">{{ error }}</div>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>
