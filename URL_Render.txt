@@ -1,0 +1,2 @@
+PENDIENTE: pega aquí la URL pública de Render cuando despliegues la aplicación.
+Ejemplo: https://taxi-price-app.onrender.com

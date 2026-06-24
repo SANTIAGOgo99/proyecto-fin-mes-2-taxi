@@ -1,0 +1,8 @@
+[
+  "Base_Fare",
+  "Trip_Distance_km",
+  "Per_Km_Rate",
+  "Trip_Duration_Minutes",
+  "Per_Minute_Rate",
+  "Traffic_Conditions"
+]
